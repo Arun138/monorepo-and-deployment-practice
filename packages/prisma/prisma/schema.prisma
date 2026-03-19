@@ -16,4 +16,9 @@ model User {
   id String @id @default(uuid())
   username String @unique
   password String 
+
+  // PostgreSQL automatically lowercases any unquoted identifier. So 'User' becomes 'user' internally, but the actual table name stored is "User" . But PostgreSQL is case-sensitive with identifiers. So we need use quotes for tables. Double quotes preserve the exact casing : 'INSERT INTO "User" (username, password) VALUES ($1, $2) RETURNING *'
+  // Or we map the model to a lowercase table name using @@map:
+  @@map("users")  // ← table will be created as lowercase "users". 
+
 }
