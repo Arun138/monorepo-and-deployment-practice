@@ -22,3 +22,5 @@ model User {
   @@map("users")  // ← table will be created as lowercase "users". 
 
 }
+
+
