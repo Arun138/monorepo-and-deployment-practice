@@ -1,13 +1,18 @@
 import axios from 'axios';
 
 export default async function Home() {
-  const response = await axios.get('http://localhost:3001/allUsers')
-  const allUsers = response?.data?.allUsers
-  
+  let allUsers;
+  try {
+    
+    const response = await axios.get('http://localhost:3001/allUsers')
+     allUsers = response?.data?.allUsers
+  } catch (error) {
+    allUsers=[]
+  }
   
   return <div>
     {
-      allUsers.map((user)=>
+      allUsers.map((user:any)=>
         <p key={user.id}>
           <span>{user.id} : {user.username} </span>
         </p>
